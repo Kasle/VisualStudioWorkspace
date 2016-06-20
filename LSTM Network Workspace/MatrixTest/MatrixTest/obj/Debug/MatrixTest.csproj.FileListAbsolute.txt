@@ -1,0 +1,1 @@
+C:\Users\Arkyd-Laptop\Desktop\Visual Studio Projects\LSTM Network Workspace\MatrixTest\MatrixTest\bin\Debug\MatrixTest.exe.config
