@@ -1,0 +1,6 @@
+C:\Users\Arkyd-Laptop\Desktop\Visual Studio Projects\LSTM Network Workspace\LSTM Network Workspace\LSTM Network Workspace\bin\Debug\LSTM Network Workspace.exe.config
+C:\Users\Arkyd-Laptop\Desktop\Visual Studio Projects\LSTM Network Workspace\LSTM Network Workspace\LSTM Network Workspace\bin\Debug\LSTM Network Workspace.exe
+C:\Users\Arkyd-Laptop\Desktop\Visual Studio Projects\LSTM Network Workspace\LSTM Network Workspace\LSTM Network Workspace\bin\Debug\LSTM Network Workspace.pdb
+C:\Users\Arkyd-Laptop\Desktop\Visual Studio Projects\LSTM Network Workspace\LSTM Network Workspace\LSTM Network Workspace\obj\Debug\LSTM Network Workspace.exe
+C:\Users\Arkyd-Laptop\Desktop\Visual Studio Projects\LSTM Network Workspace\LSTM Network Workspace\LSTM Network Workspace\obj\Debug\LSTM Network Workspace.pdb
+C:\Users\Arkyd-Laptop\Desktop\Visual Studio Projects\LSTM Network Workspace\LSTM Network Workspace\LSTM Network Workspace\obj\Debug\LSTM Network Workspace.csprojResolveAssemblyReference.cache
