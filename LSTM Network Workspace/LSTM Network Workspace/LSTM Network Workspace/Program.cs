@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Diagnostics;
 
 namespace LSTM_Network_Workspace
 {
@@ -10,20 +11,33 @@ namespace LSTM_Network_Workspace
     {
         static void Main(string[] args) // Main ----------------------------------------------------------------------------------------------------
         {
-            Network net = new Network(new int[] { 100, 100 }); //Word Count, Hidden Size (Given Value + 2)
+            int netSize = 1000;
+            Network net = new Network(new int[] { netSize, 1, 5 }); //Word Count, Hidden Size (Given Value + 2), Depth
             Console.WriteLine("Start.");
-            double[] input = new double[100];
-            Random nR = new Random();
-            for (int eachInput = 0; eachInput < 100; eachInput++)
-            {
-                input[eachInput] = nR.Next(-100, 100) / 100.0;
+            double averageMSec = 0;
+            net.Forward(new double[netSize]);
+            double weightAmount = net.weightArray.Length + net.nodeArray.Length;
+            for (int test = 0; test < 10000; test++) {
+                double[] input = new double[netSize];
+                Random nR = new Random();
+                for (int eachInput = 0; eachInput < netSize; eachInput++)
+                {
+                    input[eachInput] = nR.Next(-100, 100) / 100.0;
+                }
+                Stopwatch timer = new Stopwatch();
+                timer.Start();
+                net.Forward(input);
+                averageMSec = ((averageMSec * test) + timer.Elapsed.TotalMilliseconds) / (test + 1.0);
+                double nps = weightAmount / averageMSec;
+                Console.WriteLine("{0}, {1}, {2}", nps, ((averageMSec * 1000) / 1000) / 60, (averageMSec / weightAmount) * 1000);
             }
-            double[] netOut = net.Forward(input);
-            Console.WriteLine("End.");
+            /*double[] netOut = net.Forward(input);
             foreach (double output in netOut)
             {
                 Console.WriteLine(Math.Round(output));
             }
+            net.Print();*/
+            Console.WriteLine("End.");
             Console.ReadLine();
         }
     }
@@ -34,8 +48,8 @@ namespace LSTM_Network_Workspace
         private int randomPrecision;
         public double bias;
         public double learningConstant;
-        private double[,] nodeArray;
-        private double[,,] weightArray;
+        public double[,] nodeArray;
+        public double[,,] weightArray;
         private double[,,] deltaArray;
 
         public Network(int[] setSize, double setBias = 1.0, double setLearningConstant = 0.01, int setRandomPrecision = 1000)
@@ -88,7 +102,7 @@ namespace LSTM_Network_Workspace
                 for (int node = 0; node < nodeArray.GetLength(1); node++)
                 {
 
-                    Console.WriteLine("- Node: {0} ---------- Sum: {1}, Activated: {2} -----",node ,nodeArray[layer, node], Math.Tanh(nodeArray[layer, node]));
+                    Console.WriteLine("- Node: {0} ---------- Sum: {1}, Activated: {2} -----\n",node ,nodeArray[layer, node], Math.Tanh(nodeArray[layer, node]));
                     if (layer != nodeArray.GetLength(0)-1)
                     {
                         for (int weight = 0; weight < weightArray.GetLength(2); weight++)
@@ -96,6 +110,7 @@ namespace LSTM_Network_Workspace
                             Console.WriteLine(weightArray[layer, node, weight]);
                         }
                     }
+                    Console.WriteLine();
                 }
             }
         }
@@ -147,6 +162,10 @@ namespace LSTM_Network_Workspace
         private void Clear()
         {
             nodeArray = new double[nodeArray.GetLength(0), nodeArray.GetLength(1)];
+            for (int layer = 0; layer < nodeArray.GetLength(0); layer++)
+            {
+                nodeArray[layer,nodeArray.GetLength(1)-1] = bias;
+            }
         }
     }
 }
