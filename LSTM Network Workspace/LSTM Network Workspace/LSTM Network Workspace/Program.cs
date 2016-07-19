@@ -11,7 +11,22 @@ namespace LSTM_Network_Workspace
     {
         static void Main(string[] args) // Main ----------------------------------------------------------------------------------------------------
         {
-            int netSize = 1000;
+            List<Cage> cageList = new List<Cage>();
+            for (int i = 1; i < 500; i++)
+            {
+                cageList.Add(new Cage(i));
+            }
+            
+            while (true) //Runtime
+            {
+                Console.WriteLine("Data:\n");
+                for (int i = 0;i < cageList.Count; i++)
+                {
+                    Console.WriteLine(cageList[i].data);//Update graph
+                }
+                //5second delay
+            }
+            /*int netSize = 1000;
             Network net = new Network(new int[] { netSize, 1, 5 }); //Word Count, Hidden Size (Given Value + 2), Depth
             Console.WriteLine("Start.");
             double averageMSec = 0;
